@@ -24,7 +24,7 @@ public class Client {
         int delay = Integer.parseInt(args[2]) * 1000;
         String IPAddr = args[3];
 
-        File imageFile = new File("/Users/kirimoto/Desktop/hw2/java-client-generated/src/main/java/nmtb.png");
+        File imageFile = new File("nmtb.png");
         ImageInfo imageInfo = Imaging.getImageInfo(imageFile);
 
         String image = imageFile.length() + " " + imageInfo.getWidth() + "x" + imageInfo.getHeight();

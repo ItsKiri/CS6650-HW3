@@ -34,7 +34,7 @@ public class ReviewConsumer {
 
     public void start() throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
+        factory.setHost("EC2_Host");
         factory.setPort(5672);
 
         Connection connection = factory.newConnection();
@@ -76,13 +76,11 @@ public class ReviewConsumer {
         Map<String, AttributeValue> item = getItemResponse.item();
         if (item == null || item.isEmpty()) return;
 
-        int currentLikeOrNot = Integer.parseInt(item.get("likeornot").n());
-
-        int updatedLikeOrNot = review.equals("like") ? currentLikeOrNot + 1 : currentLikeOrNot - 1;
+        int count = Integer.parseInt(item.get(review).n()) + 1;
 
         Map<String, AttributeValueUpdate> updates = new HashMap<>();
-        updates.put("likeornot", AttributeValueUpdate.builder()
-                .value(AttributeValue.builder().n(String.valueOf(updatedLikeOrNot)).build())
+        updates.put(review, AttributeValueUpdate.builder()
+                .value(AttributeValue.builder().n(String.valueOf(count)).build())
                 .action(AttributeAction.PUT)
                 .build());
 

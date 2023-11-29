@@ -51,7 +51,7 @@ public class AlbumServlet extends HttpServlet {
     private void initializeChannelPool() throws ServletException {
         try {
             ConnectionFactory factory = new ConnectionFactory();
-            factory.setHost("localhost");
+            factory.setHost("EC2_Host");
             factory.setPort(5672);
             Connection connection = factory.newConnection();
 

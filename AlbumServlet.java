@@ -82,7 +82,8 @@ public class AlbumServlet extends HttpServlet {
         String title = req.getParameter("title");
         String year = req.getParameter("year");
         String image = req.getParameter("image");
-        String likeornot = "0";
+        String like = "0";
+        String dislike = "0";
 
         String albumID = UUID.randomUUID().toString();
 
@@ -92,7 +93,8 @@ public class AlbumServlet extends HttpServlet {
         item.put("title", AttributeValue.builder().s(title).build());
         item.put("year", AttributeValue.builder().s(year).build());
         item.put("image", AttributeValue.builder().s(image).build());
-        item.put("likeornot", AttributeValue.builder().n(likeornot).build());
+        item.put("like", AttributeValue.builder().n(like).build());
+        item.put("dislike", AttributeValue.builder().n(dislike).build());
 
         PutItemRequest putItemRequest = PutItemRequest.builder()
                 .tableName(TABLE_NAME)
